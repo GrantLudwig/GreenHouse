@@ -9,6 +9,16 @@ CORS(app)
 def my_index():
     return render_template("index.html", flask_token="Hello world")
 
+@app.route('/back/nextWater', methods=['GET'])
+def nextWater():
+    lastWater = 1584416537
+    timeBetweenWatering = 50
+
+    waterNext = lastWater + (timeBetweenWatering * 60)
+
+    response = json.dumps({"nextWater": waterNext})
+    return Response(response = response, status = 200, mimetype = "application/json")
+
 if __name__ == '__main__':
     try:
         app.run(host='0.0.0.0', threaded = True)
